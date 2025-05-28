@@ -153,10 +153,10 @@ int main(void)
   //    LL_GPIO_TogglePin(BLUE_LED_GPIO_Port, BLUE_LED_Pin);
   //  }
   LL_GPIO_TogglePin(ORANGE_LED_GPIO_Port, ORANGE_LED_Pin);
-  while (1)
-  {
-    LL_GPIO_TogglePin(ORANGE_LED_GPIO_Port, ORANGE_LED_Pin);
-  }
+  // while (1)
+  // {
+  //   LL_GPIO_TogglePin(ORANGE_LED_GPIO_Port, ORANGE_LED_Pin);
+  // }
   //
   // while (1)
   // {
