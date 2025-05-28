@@ -92,14 +92,14 @@ static void MX_I2C2_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-//uCAN_MSG txMessage1;
-//uCAN_MSG rxMessage1;
+// uCAN_MSG txMessage1;
+// uCAN_MSG rxMessage1;
 /* USER CODE END 0 */
 
 /**
-  * @brief  The application entry point.
-  * @retval int
-  */
+ * @brief  The application entry point.
+ * @retval int
+ */
 int main(void)
 {
 
@@ -137,92 +137,93 @@ int main(void)
   /* USER CODE BEGIN 2 */
   Init_semaphore();
   Config_DMA_sine_wave_destination();
-//  UARTStdioConfig(USART1,USART1_IRQn, true);
-  while(!LL_GPIO_IsInputPinSet(TAKE_TRIGGER_RUN_FROM_HIL_GPIO_Port, TAKE_TRIGGER_RUN_FROM_HIL_Pin));
+  //  UARTStdioConfig(USART1,USART1_IRQn, true);
+  while (!LL_GPIO_IsInputPinSet(TAKE_TRIGGER_RUN_FROM_HIL_GPIO_Port, TAKE_TRIGGER_RUN_FROM_HIL_Pin))
+    ;
 
   LL_mDelay(100);
 
-//  uart_printf("DUT-F411\r\n");
-//  if (CANSPI_Initialize())
-//  {
-//    LL_GPIO_TogglePin(GREEN_LED_GPIO_Port,GREEN_LED_Pin );
-//  }
-//  else
-//  {
-//    LL_GPIO_TogglePin(BLUE_LED_GPIO_Port, BLUE_LED_Pin);
-//  }
+  //  uart_printf("DUT-F411\r\n");
+  //  if (CANSPI_Initialize())
+  //  {
+  //    LL_GPIO_TogglePin(GREEN_LED_GPIO_Port,GREEN_LED_Pin );
+  //  }
+  //  else
+  //  {
+  //    LL_GPIO_TogglePin(BLUE_LED_GPIO_Port, BLUE_LED_Pin);
+  //  }
   LL_GPIO_TogglePin(ORANGE_LED_GPIO_Port, ORANGE_LED_Pin);
-//
-//while(1){
-////  if(CANSPI_Receive(&rxMessage))
-////  {
-////  	LL_GPIO_TogglePin(BLUE_LED_GPIO_Port, BLUE_LED_Pin);
-////  }
-//
-//  txMessage.frame.idType = dSTANDARD_CAN_MSG_ID_2_0B;
-//  txMessage.frame.id = 0x0A;
-//  txMessage.frame.dlc = 8;
-//  txMessage.frame.data0 = 0;
-//  txMessage.frame.data1 = 1;
-//  txMessage.frame.data2 = 2;
-//  txMessage.frame.data3 = 3;
-//  txMessage.frame.data4 = 4;
-//  txMessage.frame.data5 = 5;
-//  txMessage.frame.data6 = 6;
-//  txMessage.frame.data7 = 7;
-//  if(CANSPI_Transmit(&txMessage))
-//	{
-//  		txMessage.frame.data7 = 8;
-//  		LL_GPIO_TogglePin(GREEN_LED_GPIO_Port,GREEN_LED_Pin );
-//	}
-//
-//  LL_mDelay(1000);
-//}
+  //
+  while (1)
+  {
+    //  if(CANSPI_Receive(&rxMessage))
+    //  {
+    //  	LL_GPIO_TogglePin(BLUE_LED_GPIO_Port, BLUE_LED_Pin);
+    //  }
 
+    txMessage.frame.idType = dSTANDARD_CAN_MSG_ID_2_0B;
+    txMessage.frame.id = 0x0A;
+    txMessage.frame.dlc = 8;
+    txMessage.frame.data0 = 0;
+    txMessage.frame.data1 = 1;
+    txMessage.frame.data2 = 2;
+    txMessage.frame.data3 = 3;
+    txMessage.frame.data4 = 4;
+    txMessage.frame.data5 = 5;
+    txMessage.frame.data6 = 6;
+    txMessage.frame.data7 = 7;
+    if (CANSPI_Transmit(&txMessage))
+    {
+      txMessage.frame.data7 = 8;
+      LL_GPIO_TogglePin(GREEN_LED_GPIO_Port, GREEN_LED_Pin);
+    }
+
+    LL_mDelay(1000);
+  }
 
   //	xTaskCreate(set_date_time_rtc, "set date time for rtc", configMINIMAL_STACK_SIZE*4,NULL, 1, NULL);
   //	xTaskCreate(get_date_time_rtc, "get date and time rtc", configMINIMAL_STACK_SIZE*4, NULL, 1, NULL);
 
-//    xTaskCreate(toggle_red_led, "toggle red led", configMINIMAL_STACK_SIZE, NULL, 3, NULL);
-//    xTaskCreate(toggle_green_led, "toggle green led", configMINIMAL_STACK_SIZE, NULL, 2, NULL);
-//    xTaskCreate(toggle_blue_led, "toggle blue led", configMINIMAL_STACK_SIZE, NULL, 1, NULL);
-//
-//    xTaskCreate(Task_trans_data_eeprom, "transmit data to eeprom", configMINIMAL_STACK_SIZE * 4, NULL, 2, NULL);
-//    xTaskCreate(read_data_eeprom, "read data from eeprom", configMINIMAL_STACK_SIZE * 4, NULL, 1, NULL);
-//  MCP4725 myMCP4725;
-//  float vref=MCP4725_getReferenceVoltage(&myMCP4725);
-//  myMCP4725 = MCP4725_init(&hi2c2, MCP4725A0_ADDR_A00, vref);
-//  if(MCP4725_isConnected(&myMCP4725))
-//  {
-//	  LL_GPIO_SetOutputPin(BLUE_LED_GPIO_Port, BLUE_LED_Pin);
-//  }
-//while(1){
-//
-//  for(uint32_t i=0;i<512;i++)
-//	  MCP4725_setValue(&myMCP4725,sineTable_512[i],MCP4725_FAST_MODE,MCP4725_POWER_DOWN_OFF);}
+  //    xTaskCreate(toggle_red_led, "toggle red led", configMINIMAL_STACK_SIZE, NULL, 3, NULL);
+  //    xTaskCreate(toggle_green_led, "toggle green led", configMINIMAL_STACK_SIZE, NULL, 2, NULL);
+  //    xTaskCreate(toggle_blue_led, "toggle blue led", configMINIMAL_STACK_SIZE, NULL, 1, NULL);
+  //
+  //    xTaskCreate(Task_trans_data_eeprom, "transmit data to eeprom", configMINIMAL_STACK_SIZE * 4, NULL, 2, NULL);
+  //    xTaskCreate(read_data_eeprom, "read data from eeprom", configMINIMAL_STACK_SIZE * 4, NULL, 1, NULL);
+  //  MCP4725 myMCP4725;
+  //  float vref=MCP4725_getReferenceVoltage(&myMCP4725);
+  //  myMCP4725 = MCP4725_init(&hi2c2, MCP4725A0_ADDR_A00, vref);
+  //  if(MCP4725_isConnected(&myMCP4725))
+  //  {
+  //	  LL_GPIO_SetOutputPin(BLUE_LED_GPIO_Port, BLUE_LED_Pin);
+  //  }
+  // while(1){
+  //
+  //  for(uint32_t i=0;i<512;i++)
+  //	  MCP4725_setValue(&myMCP4725,sineTable_512[i],MCP4725_FAST_MODE,MCP4725_POWER_DOWN_OFF);}
 
-//  MCP4725_setValue(&myMCP4725,4095,MCP4725_FAST_MODE,MCP4725_POWER_DOWN_OFF);
-//  	  test_case_1();
+  //  MCP4725_setValue(&myMCP4725,4095,MCP4725_FAST_MODE,MCP4725_POWER_DOWN_OFF);
+  //  	  test_case_1();
 
-//  	  test_case_2();
+  //  	  test_case_2();
 
-//  	  test_case_3();
-//  	  	  test_case_4();
-//  	  	  test_case_5();
-//  	  MCP4725_SetVoltage(4095);
+  //  	  test_case_3();
+  //  	  	  test_case_4();
+  //  	  	  test_case_5();
+  //  	  MCP4725_SetVoltage(4095);
 
-//    xTaskCreate(ButtonTask, "ButtonTask", configMINIMAL_STACK_SIZE*2, NULL, 2, &buttonTaskHandle);
+  //    xTaskCreate(ButtonTask, "ButtonTask", configMINIMAL_STACK_SIZE*2, NULL, 2, &buttonTaskHandle);
 
-//    xTaskCreate(write_data_W25Q32, "write_data_W25Q32", configMINIMAL_STACK_SIZE*4,NULL, 2, NULL);
-//    xTaskCreate(read_data_W25Q32, "read_data_W25Q32", configMINIMAL_STACK_SIZE*4, NULL, 1, NULL);
-//    xTaskCreate(write_and_read_data_W25Q32, "write and read data serial flash", configMINIMAL_STACK_SIZE*4, NULL, 1, NULL);
+  //    xTaskCreate(write_data_W25Q32, "write_data_W25Q32", configMINIMAL_STACK_SIZE*4,NULL, 2, NULL);
+  //    xTaskCreate(read_data_W25Q32, "read_data_W25Q32", configMINIMAL_STACK_SIZE*4, NULL, 1, NULL);
+  //    xTaskCreate(write_and_read_data_W25Q32, "write and read data serial flash", configMINIMAL_STACK_SIZE*4, NULL, 1, NULL);
   //  xTaskCreate(read_id_W25Q32, "read_id_W25Q32",configMINIMAL_STACK_SIZE*4, NULL, 1, NULL);
 
   //  xTaskCreate(send_can_msg,"send_can_msg", configMINIMAL_STACK_SIZE*4, NULL, 1, NULL);
   //  xTaskCreate(test_loop_back_mode, "test loop back mode CAN", configMINIMAL_STACK_SIZE*2, NULL, 1, NULL);
 
-//  xTaskCreate(Task_send_Log_uart, "send log uart", configMINIMAL_STACK_SIZE * 2, NULL, 1, NULL);
-//  xTaskCreate(demouart, "send log uart", configMINIMAL_STACK_SIZE * 2, NULL, 1, NULL);
+  //  xTaskCreate(Task_send_Log_uart, "send log uart", configMINIMAL_STACK_SIZE * 2, NULL, 1, NULL);
+  //  xTaskCreate(demouart, "send log uart", configMINIMAL_STACK_SIZE * 2, NULL, 1, NULL);
   vTaskStartScheduler();
   /* USER CODE END 2 */
 
@@ -238,30 +239,28 @@ int main(void)
 }
 
 /**
-  * @brief System Clock Configuration
-  * @retval None
-  */
+ * @brief System Clock Configuration
+ * @retval None
+ */
 void SystemClock_Config(void)
 {
   LL_FLASH_SetLatency(LL_FLASH_LATENCY_1);
-  while(LL_FLASH_GetLatency()!= LL_FLASH_LATENCY_1)
+  while (LL_FLASH_GetLatency() != LL_FLASH_LATENCY_1)
   {
   }
   LL_PWR_SetRegulVoltageScaling(LL_PWR_REGU_VOLTAGE_SCALE1);
   LL_RCC_HSE_Enable();
 
-   /* Wait till HSE is ready */
-  while(LL_RCC_HSE_IsReady() != 1)
+  /* Wait till HSE is ready */
+  while (LL_RCC_HSE_IsReady() != 1)
   {
-
   }
   LL_RCC_PLL_ConfigDomain_SYS(LL_RCC_PLLSOURCE_HSE, LL_RCC_PLLM_DIV_4, 60, LL_RCC_PLLP_DIV_2);
   LL_RCC_PLL_Enable();
 
-   /* Wait till PLL is ready */
-  while(LL_RCC_PLL_IsReady() != 1)
+  /* Wait till PLL is ready */
+  while (LL_RCC_PLL_IsReady() != 1)
   {
-
   }
   while (LL_PWR_IsActiveFlag_VOS() == 0)
   {
@@ -271,15 +270,14 @@ void SystemClock_Config(void)
   LL_RCC_SetAPB2Prescaler(LL_RCC_APB2_DIV_1);
   LL_RCC_SetSysClkSource(LL_RCC_SYS_CLKSOURCE_PLL);
 
-   /* Wait till System clock is ready */
-  while(LL_RCC_GetSysClkSource() != LL_RCC_SYS_CLKSOURCE_STATUS_PLL)
+  /* Wait till System clock is ready */
+  while (LL_RCC_GetSysClkSource() != LL_RCC_SYS_CLKSOURCE_STATUS_PLL)
   {
-
   }
   LL_SetSystemCoreClock(60000000);
 
-   /* Update the time base */
-  if (HAL_InitTick (TICK_INT_PRIORITY) != HAL_OK)
+  /* Update the time base */
+  if (HAL_InitTick(TICK_INT_PRIORITY) != HAL_OK)
   {
     Error_Handler();
   }
@@ -287,10 +285,10 @@ void SystemClock_Config(void)
 }
 
 /**
-  * @brief ADC1 Initialization Function
-  * @param None
-  * @retval None
-  */
+ * @brief ADC1 Initialization Function
+ * @param None
+ * @retval None
+ */
 static void MX_ADC1_Init(void)
 {
 
@@ -342,7 +340,7 @@ static void MX_ADC1_Init(void)
   /* USER CODE END ADC1_Init 1 */
 
   /** Common config
-  */
+   */
   ADC_InitStruct.Resolution = LL_ADC_RESOLUTION_12B;
   ADC_InitStruct.DataAlignment = LL_ADC_DATA_ALIGN_RIGHT;
   ADC_InitStruct.SequencersScanMode = LL_ADC_SEQ_SCAN_DISABLE;
@@ -359,20 +357,19 @@ static void MX_ADC1_Init(void)
   LL_ADC_REG_StartConversionExtTrig(ADC1, LL_ADC_REG_TRIG_EXT_RISING);
 
   /** Configure Regular Channel
-  */
+   */
   LL_ADC_REG_SetSequencerRanks(ADC1, LL_ADC_REG_RANK_1, LL_ADC_CHANNEL_1);
   LL_ADC_SetChannelSamplingTime(ADC1, LL_ADC_CHANNEL_1, LL_ADC_SAMPLINGTIME_480CYCLES);
   /* USER CODE BEGIN ADC1_Init 2 */
   LL_ADC_Enable(ADC1);
   /* USER CODE END ADC1_Init 2 */
-
 }
 
 /**
-  * @brief I2C1 Initialization Function
-  * @param None
-  * @retval None
-  */
+ * @brief I2C1 Initialization Function
+ * @param None
+ * @retval None
+ */
 static void MX_I2C1_Init(void)
 {
 
@@ -389,7 +386,7 @@ static void MX_I2C1_Init(void)
   PB6   ------> I2C1_SCL
   PB7   ------> I2C1_SDA
   */
-  GPIO_InitStruct.Pin = LL_GPIO_PIN_6|LL_GPIO_PIN_7;
+  GPIO_InitStruct.Pin = LL_GPIO_PIN_6 | LL_GPIO_PIN_7;
   GPIO_InitStruct.Mode = LL_GPIO_MODE_ALTERNATE;
   GPIO_InitStruct.Speed = LL_GPIO_SPEED_FREQ_VERY_HIGH;
   GPIO_InitStruct.OutputType = LL_GPIO_OUTPUT_OPENDRAIN;
@@ -405,7 +402,7 @@ static void MX_I2C1_Init(void)
   /* USER CODE END I2C1_Init 1 */
 
   /** I2C Initialization
-  */
+   */
   LL_I2C_DisableOwnAddress2(I2C1);
   LL_I2C_DisableGeneralCall(I2C1);
   LL_I2C_EnableClockStretching(I2C1);
@@ -420,14 +417,13 @@ static void MX_I2C1_Init(void)
   /* USER CODE BEGIN I2C1_Init 2 */
 
   /* USER CODE END I2C1_Init 2 */
-
 }
 
 /**
-  * @brief I2C2 Initialization Function
-  * @param None
-  * @retval None
-  */
+ * @brief I2C2 Initialization Function
+ * @param None
+ * @retval None
+ */
 static void MX_I2C2_Init(void)
 {
 
@@ -454,14 +450,13 @@ static void MX_I2C2_Init(void)
   /* USER CODE BEGIN I2C2_Init 2 */
 
   /* USER CODE END I2C2_Init 2 */
-
 }
 
 /**
-  * @brief SPI1 Initialization Function
-  * @param None
-  * @retval None
-  */
+ * @brief SPI1 Initialization Function
+ * @param None
+ * @retval None
+ */
 static void MX_SPI1_Init(void)
 {
 
@@ -492,14 +487,13 @@ static void MX_SPI1_Init(void)
   /* USER CODE BEGIN SPI1_Init 2 */
   LL_SPI_Enable(SPI1);
   /* USER CODE END SPI1_Init 2 */
-
 }
 
 /**
-  * @brief SPI2 Initialization Function
-  * @param None
-  * @retval None
-  */
+ * @brief SPI2 Initialization Function
+ * @param None
+ * @retval None
+ */
 static void MX_SPI2_Init(void)
 {
 
@@ -520,7 +514,7 @@ static void MX_SPI2_Init(void)
   PB14   ------> SPI2_MISO
   PB15   ------> SPI2_MOSI
   */
-  GPIO_InitStruct.Pin = LL_GPIO_PIN_13|LL_GPIO_PIN_14|LL_GPIO_PIN_15;
+  GPIO_InitStruct.Pin = LL_GPIO_PIN_13 | LL_GPIO_PIN_14 | LL_GPIO_PIN_15;
   GPIO_InitStruct.Mode = LL_GPIO_MODE_ALTERNATE;
   GPIO_InitStruct.Speed = LL_GPIO_SPEED_FREQ_VERY_HIGH;
   GPIO_InitStruct.OutputType = LL_GPIO_OUTPUT_PUSHPULL;
@@ -547,14 +541,13 @@ static void MX_SPI2_Init(void)
   /* USER CODE BEGIN SPI2_Init 2 */
 
   /* USER CODE END SPI2_Init 2 */
-
 }
 
 /**
-  * @brief TIM2 Initialization Function
-  * @param None
-  * @retval None
-  */
+ * @brief TIM2 Initialization Function
+ * @param None
+ * @retval None
+ */
 static void MX_TIM2_Init(void)
 {
 
@@ -580,16 +573,15 @@ static void MX_TIM2_Init(void)
   LL_TIM_SetTriggerOutput(TIM2, LL_TIM_TRGO_UPDATE);
   LL_TIM_DisableMasterSlaveMode(TIM2);
   /* USER CODE BEGIN TIM2_Init 2 */
-//  LL_TIM_DisableCounter(TIM2);
+  //  LL_TIM_DisableCounter(TIM2);
   /* USER CODE END TIM2_Init 2 */
-
 }
 
 /**
-  * @brief USART1 Initialization Function
-  * @param None
-  * @retval None
-  */
+ * @brief USART1 Initialization Function
+ * @param None
+ * @retval None
+ */
 static void MX_USART1_UART_Init(void)
 {
 
@@ -642,14 +634,13 @@ static void MX_USART1_UART_Init(void)
   /* USER CODE BEGIN USART1_Init 2 */
 
   /* USER CODE END USART1_Init 2 */
-
 }
 
 /**
-  * @brief USART6 Initialization Function
-  * @param None
-  * @retval None
-  */
+ * @brief USART6 Initialization Function
+ * @param None
+ * @retval None
+ */
 static void MX_USART6_UART_Init(void)
 {
 
@@ -669,7 +660,7 @@ static void MX_USART6_UART_Init(void)
   PC6   ------> USART6_TX
   PC7   ------> USART6_RX
   */
-  GPIO_InitStruct.Pin = LL_GPIO_PIN_6|LL_GPIO_PIN_7;
+  GPIO_InitStruct.Pin = LL_GPIO_PIN_6 | LL_GPIO_PIN_7;
   GPIO_InitStruct.Mode = LL_GPIO_MODE_ALTERNATE;
   GPIO_InitStruct.Speed = LL_GPIO_SPEED_FREQ_VERY_HIGH;
   GPIO_InitStruct.OutputType = LL_GPIO_OUTPUT_PUSHPULL;
@@ -693,12 +684,11 @@ static void MX_USART6_UART_Init(void)
   /* USER CODE BEGIN USART6_Init 2 */
 
   /* USER CODE END USART6_Init 2 */
-
 }
 
 /**
-  * Enable DMA controller clock
-  */
+ * Enable DMA controller clock
+ */
 static void MX_DMA_Init(void)
 {
 
@@ -708,22 +698,21 @@ static void MX_DMA_Init(void)
 
   /* DMA interrupt init */
   /* DMA2_Stream0_IRQn interrupt configuration */
-  NVIC_SetPriority(DMA2_Stream0_IRQn, NVIC_EncodePriority(NVIC_GetPriorityGrouping(),6, 0));
+  NVIC_SetPriority(DMA2_Stream0_IRQn, NVIC_EncodePriority(NVIC_GetPriorityGrouping(), 6, 0));
   NVIC_EnableIRQ(DMA2_Stream0_IRQn);
-
 }
 
 /**
-  * @brief GPIO Initialization Function
-  * @param None
-  * @retval None
-  */
+ * @brief GPIO Initialization Function
+ * @param None
+ * @retval None
+ */
 static void MX_GPIO_Init(void)
 {
   LL_EXTI_InitTypeDef EXTI_InitStruct = {0};
   LL_GPIO_InitTypeDef GPIO_InitStruct = {0};
-/* USER CODE BEGIN MX_GPIO_Init_1 */
-/* USER CODE END MX_GPIO_Init_1 */
+  /* USER CODE BEGIN MX_GPIO_Init_1 */
+  /* USER CODE END MX_GPIO_Init_1 */
 
   /* GPIO Ports Clock Enable */
   LL_AHB1_GRP1_EnableClock(LL_AHB1_GRP1_PERIPH_GPIOE);
@@ -740,8 +729,7 @@ static void MX_GPIO_Init(void)
   LL_GPIO_ResetOutputPin(DUT_CS1_GPIO_Port, DUT_CS1_Pin);
 
   /**/
-  LL_GPIO_ResetOutputPin(GPIOD, CONTROL_REDLED_SOFTWARE_Pin|CONTROL_GREENLED_SOFTWARE_Pin|CONTROL_BLUELED_SOFTWARE_Pin|GREEN_LED_Pin
-                          |ORANGE_LED_Pin|BLUE_LED_Pin);
+  LL_GPIO_ResetOutputPin(GPIOD, CONTROL_REDLED_SOFTWARE_Pin | CONTROL_GREENLED_SOFTWARE_Pin | CONTROL_BLUELED_SOFTWARE_Pin | GREEN_LED_Pin | ORANGE_LED_Pin | BLUE_LED_Pin);
 
   /**/
   LL_GPIO_SetOutputPin(SPI2_CSS_GPIO_Port, SPI2_CSS_Pin);
@@ -777,7 +765,7 @@ static void MX_GPIO_Init(void)
   LL_GPIO_Init(GPIOE, &GPIO_InitStruct);
 
   /**/
-  GPIO_InitStruct.Pin = CONTROL_REDLED_SOFTWARE_Pin|CONTROL_GREENLED_SOFTWARE_Pin|CONTROL_BLUELED_SOFTWARE_Pin;
+  GPIO_InitStruct.Pin = CONTROL_REDLED_SOFTWARE_Pin | CONTROL_GREENLED_SOFTWARE_Pin | CONTROL_BLUELED_SOFTWARE_Pin;
   GPIO_InitStruct.Mode = LL_GPIO_MODE_OUTPUT;
   GPIO_InitStruct.Speed = LL_GPIO_SPEED_FREQ_MEDIUM;
   GPIO_InitStruct.OutputType = LL_GPIO_OUTPUT_PUSHPULL;
@@ -785,7 +773,7 @@ static void MX_GPIO_Init(void)
   LL_GPIO_Init(GPIOD, &GPIO_InitStruct);
 
   /**/
-  GPIO_InitStruct.Pin = GREEN_LED_Pin|ORANGE_LED_Pin|BLUE_LED_Pin;
+  GPIO_InitStruct.Pin = GREEN_LED_Pin | ORANGE_LED_Pin | BLUE_LED_Pin;
   GPIO_InitStruct.Mode = LL_GPIO_MODE_OUTPUT;
   GPIO_InitStruct.Speed = LL_GPIO_SPEED_FREQ_LOW;
   GPIO_InitStruct.OutputType = LL_GPIO_OUTPUT_PUSHPULL;
@@ -847,16 +835,16 @@ static void MX_GPIO_Init(void)
   LL_GPIO_SetPinMode(SW6_MMI_GPIO_Port, SW6_MMI_Pin, LL_GPIO_MODE_INPUT);
 
   /* EXTI interrupt init*/
-  NVIC_SetPriority(EXTI2_IRQn, NVIC_EncodePriority(NVIC_GetPriorityGrouping(),6, 0));
+  NVIC_SetPriority(EXTI2_IRQn, NVIC_EncodePriority(NVIC_GetPriorityGrouping(), 6, 0));
   NVIC_EnableIRQ(EXTI2_IRQn);
-  NVIC_SetPriority(EXTI3_IRQn, NVIC_EncodePriority(NVIC_GetPriorityGrouping(),6, 0));
+  NVIC_SetPriority(EXTI3_IRQn, NVIC_EncodePriority(NVIC_GetPriorityGrouping(), 6, 0));
   NVIC_EnableIRQ(EXTI3_IRQn);
-  NVIC_SetPriority(EXTI4_IRQn, NVIC_EncodePriority(NVIC_GetPriorityGrouping(),6, 0));
+  NVIC_SetPriority(EXTI4_IRQn, NVIC_EncodePriority(NVIC_GetPriorityGrouping(), 6, 0));
   NVIC_EnableIRQ(EXTI4_IRQn);
 
-/* USER CODE BEGIN MX_GPIO_Init_2 */
+  /* USER CODE BEGIN MX_GPIO_Init_2 */
 
-/* USER CODE END MX_GPIO_Init_2 */
+  /* USER CODE END MX_GPIO_Init_2 */
 }
 
 /* USER CODE BEGIN 4 */
@@ -864,9 +852,9 @@ static void MX_GPIO_Init(void)
 /* USER CODE END 4 */
 
 /**
-  * @brief  This function is executed in case of error occurrence.
-  * @retval None
-  */
+ * @brief  This function is executed in case of error occurrence.
+ * @retval None
+ */
 void Error_Handler(void)
 {
   /* USER CODE BEGIN Error_Handler_Debug */
@@ -878,14 +866,14 @@ void Error_Handler(void)
   /* USER CODE END Error_Handler_Debug */
 }
 
-#ifdef  USE_FULL_ASSERT
+#ifdef USE_FULL_ASSERT
 /**
-  * @brief  Reports the name of the source file and the source line number
-  *         where the assert_param error has occurred.
-  * @param  file: pointer to the source file name
-  * @param  line: assert_param error line source number
-  * @retval None
-  */
+ * @brief  Reports the name of the source file and the source line number
+ *         where the assert_param error has occurred.
+ * @param  file: pointer to the source file name
+ * @param  line: assert_param error line source number
+ * @retval None
+ */
 void assert_failed(uint8_t *file, uint32_t line)
 {
   /* USER CODE BEGIN 6 */
