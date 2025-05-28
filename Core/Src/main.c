@@ -154,32 +154,32 @@ int main(void)
   //  }
   LL_GPIO_TogglePin(ORANGE_LED_GPIO_Port, ORANGE_LED_Pin);
   //
-  // while (1)
-  // {
-  //   //  if(CANSPI_Receive(&rxMessage))
-  //   //  {
-  //   //  	LL_GPIO_TogglePin(BLUE_LED_GPIO_Port, BLUE_LED_Pin);
-  //   //  }
+  while (1)
+  {
+    //  if(CANSPI_Receive(&rxMessage))
+    //  {
+    //  	LL_GPIO_TogglePin(BLUE_LED_GPIO_Port, BLUE_LED_Pin);
+    //  }
 
-  //   txMessage.frame.idType = dSTANDARD_CAN_MSG_ID_2_0B;
-  //   txMessage.frame.id = 0x0A;
-  //   txMessage.frame.dlc = 8;
-  //   txMessage.frame.data0 = 0;
-  //   txMessage.frame.data1 = 1;
-  //   txMessage.frame.data2 = 2;
-  //   txMessage.frame.data3 = 3;
-  //   txMessage.frame.data4 = 4;
-  //   txMessage.frame.data5 = 5;
-  //   txMessage.frame.data6 = 6;
-  //   txMessage.frame.data7 = 7;
-  //   if (CANSPI_Transmit(&txMessage))
-  //   {
-  //     txMessage.frame.data7 = 8;
-  //     LL_GPIO_TogglePin(GREEN_LED_GPIO_Port, GREEN_LED_Pin);
-  //   }
+    txMessage.frame.idType = dSTANDARD_CAN_MSG_ID_2_0B;
+    txMessage.frame.id = 0x0A;
+    txMessage.frame.dlc = 8;
+    txMessage.frame.data0 = 0;
+    txMessage.frame.data1 = 1;
+    txMessage.frame.data2 = 2;
+    txMessage.frame.data3 = 3;
+    txMessage.frame.data4 = 4;
+    txMessage.frame.data5 = 5;
+    txMessage.frame.data6 = 6;
+    txMessage.frame.data7 = 7;
+    if (CANSPI_Transmit(&txMessage))
+    {
+      txMessage.frame.data7 = 8;
+      LL_GPIO_TogglePin(GREEN_LED_GPIO_Port, GREEN_LED_Pin);
+    }
 
-  //   LL_mDelay(1000);
-  // }
+    LL_mDelay(1000);
+  }
 
   //	xTaskCreate(set_date_time_rtc, "set date time for rtc", configMINIMAL_STACK_SIZE*4,NULL, 1, NULL);
   //	xTaskCreate(get_date_time_rtc, "get date and time rtc", configMINIMAL_STACK_SIZE*4, NULL, 1, NULL);
