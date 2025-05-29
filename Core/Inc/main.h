@@ -57,7 +57,7 @@ extern "C" {
 /* Exported constants --------------------------------------------------------*/
 /* USER CODE BEGIN EC */
 extern I2C_HandleTypeDef hi2c2;
-extern SPI_HandleTypeDef hspi1;
+
 /* USER CODE END EC */
 
 /* Exported macro ------------------------------------------------------------*/
@@ -75,17 +75,6 @@ void Error_Handler(void);
 /* Private defines -----------------------------------------------------------*/
 #define SPI2_CSS_Pin LL_GPIO_PIN_2
 #define SPI2_CSS_GPIO_Port GPIOA
-#define INT_MCP2515_Pin LL_GPIO_PIN_3
-#define INT_MCP2515_GPIO_Port GPIOA
-#define INT_MCP2515_EXTI_IRQn EXTI3_IRQn
-#define DUT_CS1_Pin LL_GPIO_PIN_4
-#define DUT_CS1_GPIO_Port GPIOA
-#define DUT_SCK1_Pin LL_GPIO_PIN_5
-#define DUT_SCK1_GPIO_Port GPIOA
-#define DUT_MISO1_Pin LL_GPIO_PIN_6
-#define DUT_MISO1_GPIO_Port GPIOA
-#define DUT_MOSI1_Pin LL_GPIO_PIN_7
-#define DUT_MOSI1_GPIO_Port GPIOA
 #define TRIGGER_ADC_SINE_Pin LL_GPIO_PIN_4
 #define TRIGGER_ADC_SINE_GPIO_Port GPIOC
 #define TRIGGER_ADC_SINE_EXTI_IRQn EXTI4_IRQn

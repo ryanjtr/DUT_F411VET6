@@ -7,8 +7,7 @@
 
 #include "DUTtask.h"
 
-uCAN_MSG txMessage;
-uCAN_MSG rxMessage;
+
 
 rtc_handler my_rtc;
 spi_data_handle_t my_data_spi;
@@ -395,103 +394,3 @@ void write_and_read_data_W25Q32(void *pvParameters)
 	}
 }
 
-void send_can_msg(void *pvParameters)
-{
-	txMessage.frame.idType = dSTANDARD_CAN_MSG_ID_2_0B;
-	txMessage.frame.id = 0x0A;
-	txMessage.frame.dlc = 8;
-	txMessage.frame.data0 = 0;
-	txMessage.frame.data1 = 1;
-	txMessage.frame.data2 = 2;
-	txMessage.frame.data3 = 3;
-	txMessage.frame.data4 = 4;
-	txMessage.frame.data5 = 5;
-	txMessage.frame.data6 = 6;
-	txMessage.frame.data7 = 7;
-	while (1)
-	{
-		//		if (!LL_GPIO_IsInputPinSet(TAKE_TRIGGER_RUN_FROM_HIL_GPIO_Port, TAKE_TRIGGER_RUN_FROM_HIL_Pin))
-		{
-			if (CANSPI_Transmit(&txMessage))
-			{
-				uart_printf("send ok\r\n");
-				LL_GPIO_TogglePin(GREEN_LED_GPIO_Port, GREEN_LED_Pin);
-			}
-			uart_printf("eflg= 0x%02X\r\n", MCP2515_ReadByte(MCP2515_EFLG));
-			uart_printf("tec= 0x%02X\r\n", MCP2515_ReadByte(MCP2515_TEC));
-			uart_printf("rec= 0x%02X\r\n\r\n", MCP2515_ReadByte(MCP2515_REC));
-		}
-		vTaskDelay(pdMS_TO_TICKS(2000));
-	}
-}
-
-void test_loop_back_mode(void *pvParameters)
-{
-	txMessage.frame.idType = dSTANDARD_CAN_MSG_ID_2_0B;
-	txMessage.frame.id = 0x0A;
-	txMessage.frame.dlc = 8;
-	txMessage.frame.data0 = 0;
-	txMessage.frame.data1 = 1;
-	txMessage.frame.data2 = 2;
-	txMessage.frame.data3 = 3;
-	txMessage.frame.data4 = 4;
-	txMessage.frame.data5 = 5;
-	txMessage.frame.data6 = 6;
-	txMessage.frame.data7 = 7;
-
-	while (1)
-	{
-		if (CANSPI_Transmit(&txMessage))
-		{
-			// Chờ một chút để tin nhắn được loop back
-			vTaskDelay(pdMS_TO_TICKS(10));
-
-			// Kiểm tra nhận tin nhắn
-			if (CANSPI_Receive(&rxMessage))
-			{
-				// So sánh dữ liệu gửi và nhận
-				if (rxMessage.frame.id == txMessage.frame.id &&
-					rxMessage.frame.dlc == txMessage.frame.dlc &&
-					rxMessage.frame.data0 == txMessage.frame.data0 &&
-					rxMessage.frame.data1 == txMessage.frame.data1 &&
-					rxMessage.frame.data2 == txMessage.frame.data2 &&
-					rxMessage.frame.data3 == txMessage.frame.data3 &&
-					rxMessage.frame.data4 == txMessage.frame.data4 &&
-					rxMessage.frame.data5 == txMessage.frame.data5 &&
-					rxMessage.frame.data6 == txMessage.frame.data6 &&
-					rxMessage.frame.data7 == txMessage.frame.data7)
-				{
-					// Tin nhắn loop back thành công
-					uart_printf("loopback successfully\r\n");
-					LL_GPIO_TogglePin(GREEN_LED_GPIO_Port, GREEN_LED_Pin);
-				}
-			}
-		}
-		vTaskDelay(pdMS_TO_TICKS(2000));
-	}
-}
-
-void Task_send_Log_uart(void *pvParameters)
-{
-	while (1)
-	{
-		if (LL_GPIO_IsInputPinSet(TAKE_TRIGGER_RUN_FROM_HIL_GPIO_Port, TAKE_TRIGGER_RUN_FROM_HIL_Pin))
-		{
-			uart_printf("test uart@#^#&#*\n");
-			LL_GPIO_TogglePin(GREEN_LED_GPIO_Port, GREEN_LED_Pin);
-		}
-		vTaskDelay(1);
-	}
-}
-void demouart(void *pvParameters)
-{
-	while (1)
-	{
-		if (LL_GPIO_IsInputPinSet(TAKE_TRIGGER_RUN_FROM_HIL_GPIO_Port, TAKE_TRIGGER_RUN_FROM_HIL_Pin))
-		{
-			uart_printf("demo1 hcmut\n");
-			LL_GPIO_TogglePin(GREEN_LED_GPIO_Port, GREEN_LED_Pin);
-		}
-		vTaskDelay(1);
-	}
-}

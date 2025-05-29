@@ -27,8 +27,7 @@
 #include "FreeRTOS.h"
 #include "task.h"
 #include "process_sine_wave.h"
-#include "MCP2515.h"
-#include "CANSPI.h"
+
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -236,75 +235,6 @@ void EXTI2_IRQHandler(void)
   /* USER CODE BEGIN EXTI2_IRQn 1 */
 
   /* USER CODE END EXTI2_IRQn 1 */
-}
-
-/**
-  * @brief This function handles EXTI line3 interrupt.
-  */
-void EXTI3_IRQHandler(void)
-{
-  /* USER CODE BEGIN EXTI3_IRQn 0 */
-
-  /* USER CODE END EXTI3_IRQn 0 */
-  if (LL_EXTI_IsActiveFlag_0_31(LL_EXTI_LINE_3) != RESET)
-  {
-    LL_EXTI_ClearFlag_0_31(LL_EXTI_LINE_3);
-    /* USER CODE BEGIN LL_EXTI_LINE_3 */
-    uint8_t CANINTF_value = MCP2515_ReadByte(MCP2515_CANINTF);
-    if (CANINTF_value & (1 << RX0IF_))
-    {
-      if (CANSPI_Receive_IT(&rxMessage, RX0IF_))
-      {
-        char data_str[25] = "";
-        if (rxMessage.frame.dlc > 0)
-        {
-          for (uint8_t i = 0; i < rxMessage.frame.dlc && i < 8; i++)
-          {
-            char temp[4];
-            snprintf(temp, sizeof(temp), "%02X ", ((uint8_t *)&rxMessage.frame.data0)[i]);
-            strcat(data_str, temp);
-          }
-        }
-        uart_printf("RXB0: ID=0x%X, DLC=%d, Data=%s\r\n",
-                    rxMessage.frame.id,
-                    rxMessage.frame.dlc,
-                    data_str);
-        LL_GPIO_TogglePin(BLUE_LED_GPIO_Port, BLUE_LED_Pin);
-        MCP2515_BitModify(MCP2515_CANINTF, 1 << RX0IF_, 0); // clear flag
-      }
-    }
-    if (CANINTF_value & (1 << RX1IF_))
-    {
-      if (CANSPI_Receive_IT(&rxMessage, RX0IF_))
-      {
-        char data_str[25] = "";
-        if (rxMessage.frame.dlc > 0)
-        {
-          for (uint8_t i = 0; i < rxMessage.frame.dlc && i < 8; i++)
-          {
-            char temp[4];
-            snprintf(temp, sizeof(temp), "%02X ", ((uint8_t *)&rxMessage.frame.data0)[i]);
-            strcat(data_str, temp);
-          }
-        }
-        uart_printf("RXB0: ID=0x%X, DLC=%d, Data=%s\r\n",
-                    rxMessage.frame.id,
-                    rxMessage.frame.dlc,
-                    data_str);
-        LL_GPIO_TogglePin(BLUE_LED_GPIO_Port, BLUE_LED_Pin);
-        MCP2515_BitModify(MCP2515_CANINTF, 1 << RX1IF_, 0); // clear flag
-      }
-    }
-    if (CANINTF_value & (1 << ERRIF_))
-    {
-      uart_printf("Error Interrupt CAN !!!r\n");
-      MCP2515_BitModify(MCP2515_CANINTF, 1 << ERRIF_, 0); // clear flag
-    }
-    /* USER CODE END LL_EXTI_LINE_3 */
-  }
-  /* USER CODE BEGIN EXTI3_IRQn 1 */
-
-  /* USER CODE END EXTI3_IRQn 1 */
 }
 
 /**
