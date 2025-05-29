@@ -143,9 +143,9 @@ int main(void)
 
 //	test_case_1();
 //
-//	test_case_2();
+	test_case_2();
 
-	test_case_3();
+//	test_case_3();
 //	test_case_4();
 //	test_case_5();
 
