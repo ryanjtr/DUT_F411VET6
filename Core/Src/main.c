@@ -135,7 +135,7 @@ int main(void)
   while (!LL_GPIO_IsInputPinSet(TAKE_TRIGGER_RUN_FROM_HIL_GPIO_Port, TAKE_TRIGGER_RUN_FROM_HIL_Pin))
     ;
 
-  LL_mDelay(200);
+  LL_mDelay(210);
 
   LL_GPIO_TogglePin(ORANGE_LED_GPIO_Port, ORANGE_LED_Pin);
 
