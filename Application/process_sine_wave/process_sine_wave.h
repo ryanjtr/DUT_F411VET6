@@ -12,7 +12,7 @@
 #include "uart_log.h"
 #define ADC_SAMPLES 100
 #define SINE_FREQ 1000
-#define WINDOW_SIZE 5
+#define WINDOW_SIZE 8
 
 extern uint16_t adc_data[ADC_SAMPLES];
 void Config_DMA_sine_wave_destination();
