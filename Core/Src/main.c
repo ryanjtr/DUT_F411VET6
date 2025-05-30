@@ -143,10 +143,10 @@ int main(void)
 
 //	test_case_1();
 //
-	test_case_2();
+//	test_case_2();
 
 //	test_case_3();
-//	test_case_4();
+	test_case_4();
 //	test_case_5();
 
   vTaskStartScheduler();
@@ -622,7 +622,7 @@ static void MX_GPIO_Init(void)
   LL_AHB1_GRP1_EnableClock(LL_AHB1_GRP1_PERIPH_GPIOD);
 
   /**/
-  LL_GPIO_ResetOutputPin(GPIOE, LL_GPIO_PIN_3);
+  LL_GPIO_ResetOutputPin(GEN_PULSE_GPIO_Port, GEN_PULSE_Pin);
 
   /**/
   LL_GPIO_ResetOutputPin(GPIOD, CONTROL_REDLED_SOFTWARE_Pin|CONTROL_GREENLED_SOFTWARE_Pin|CONTROL_BLUELED_SOFTWARE_Pin|GREEN_LED_Pin
@@ -632,12 +632,12 @@ static void MX_GPIO_Init(void)
   LL_GPIO_SetOutputPin(SPI2_CSS_GPIO_Port, SPI2_CSS_Pin);
 
   /**/
-  GPIO_InitStruct.Pin = LL_GPIO_PIN_3;
+  GPIO_InitStruct.Pin = GEN_PULSE_Pin;
   GPIO_InitStruct.Mode = LL_GPIO_MODE_OUTPUT;
   GPIO_InitStruct.Speed = LL_GPIO_SPEED_FREQ_MEDIUM;
   GPIO_InitStruct.OutputType = LL_GPIO_OUTPUT_PUSHPULL;
   GPIO_InitStruct.Pull = LL_GPIO_PULL_UP;
-  LL_GPIO_Init(GPIOE, &GPIO_InitStruct);
+  LL_GPIO_Init(GEN_PULSE_GPIO_Port, &GPIO_InitStruct);
 
   /**/
   GPIO_InitStruct.Pin = SPI2_CSS_Pin;
