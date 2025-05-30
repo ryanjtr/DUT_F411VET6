@@ -68,7 +68,7 @@ void stop_timer_trigger_read_adc()
 			;
 		LL_USART_TransmitData8(USART1, header_and_freq[j]);
 	}
-	// moving_average(adc_data);
+	moving_average(adc_data);
 	for (uint8_t i = 0; i < 100; i++)
 	{
 		trans_packet[i * 2] = (adc_data[i] >> 8) & 0xFF; // MSB
