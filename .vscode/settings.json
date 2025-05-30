@@ -1,3 +1,6 @@
 {
-    "iis.configDir": ""
+    "iis.configDir": "",
+    "files.associations": {
+        "process_sine_wave.h": "c"
+    }
 }
