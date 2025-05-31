@@ -134,12 +134,12 @@ int main(void)
   while (!LL_GPIO_IsInputPinSet(TAKE_TRIGGER_RUN_FROM_HIL_GPIO_Port, TAKE_TRIGGER_RUN_FROM_HIL_Pin))
     ;
 
-  LL_mDelay(200);
+  LL_mDelay(100);
 
   LL_GPIO_TogglePin(ORANGE_LED_GPIO_Port, ORANGE_LED_Pin);
 
-  test_case_3();
-  // test_case_4();
+  // test_case_3();
+  test_case_4();
 
   vTaskStartScheduler();
   /* USER CODE END 2 */
