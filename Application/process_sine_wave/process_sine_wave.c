@@ -29,11 +29,12 @@ void start_timer_trigger_read_adc()
 
 void stop_timer_trigger_read_adc()
 {
+	LL_GPIO_TogglePin(BLUE_LED_GPIO_Port, BLUE_LED_Pin);
 	LL_TIM_DisableCounter(TIM2);
 	if (count_take_sine++ == 0)
 	{
 		start_timer_trigger_read_adc();
-		LL_GPIO_TogglePin(BLUE_LED_GPIO_Port, BLUE_LED_Pin);
+
 	}
 	else
 	{
