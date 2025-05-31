@@ -131,7 +131,6 @@ int main(void)
   /* USER CODE BEGIN 2 */
   Init_semaphore();
   Config_DMA_sine_wave_destination();
-  //  UARTStdioConfig(USART1,USART1_IRQn, true);
   while (!LL_GPIO_IsInputPinSet(TAKE_TRIGGER_RUN_FROM_HIL_GPIO_Port, TAKE_TRIGGER_RUN_FROM_HIL_Pin))
     ;
 
@@ -143,9 +142,9 @@ int main(void)
   //
   // test_case_2();
 
-  test_case_3();
+  // test_case_3();
   // test_case_4();
-  // test_case_5();
+  test_case_5();
 
   vTaskStartScheduler();
   /* USER CODE END 2 */
