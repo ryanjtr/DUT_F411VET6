@@ -141,11 +141,11 @@ int main(void)
 
   //	test_case_1();
   //
-  //  	test_case_2();
+  // test_case_2();
 
-  // test_case_3();
-  test_case_4();
-  test_case_5();
+  test_case_3();
+  // test_case_4();
+  // test_case_5();
 
   vTaskStartScheduler();
   /* USER CODE END 2 */
@@ -418,7 +418,7 @@ static void MX_SPI2_Init(void)
   SPI_InitStruct.ClockPolarity = LL_SPI_POLARITY_LOW;
   SPI_InitStruct.ClockPhase = LL_SPI_PHASE_2EDGE;
   SPI_InitStruct.NSS = LL_SPI_NSS_SOFT;
-  SPI_InitStruct.BaudRate = LL_SPI_BAUDRATEPRESCALER_DIV64;
+  SPI_InitStruct.BaudRate = LL_SPI_BAUDRATEPRESCALER_DIV256;
   SPI_InitStruct.BitOrder = LL_SPI_MSB_FIRST;
   SPI_InitStruct.CRCCalculation = LL_SPI_CRCCALCULATION_DISABLE;
   SPI_InitStruct.CRCPoly = 10;
