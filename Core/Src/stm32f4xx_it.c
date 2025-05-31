@@ -250,10 +250,6 @@ void EXTI4_IRQHandler(void)
     LL_EXTI_ClearFlag_0_31(LL_EXTI_LINE_4);
     /* USER CODE BEGIN LL_EXTI_LINE_4 */
     if (!LL_GPIO_IsInputPinSet(TRIGGER_ADC_SINE_GPIO_Port, TRIGGER_ADC_SINE_Pin))
-//    {
-//      stop_timer_trigger_read_adc();
-//    }
-//    else
     {
       start_timer_trigger_read_adc();
     }
