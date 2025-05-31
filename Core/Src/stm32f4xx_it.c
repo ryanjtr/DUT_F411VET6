@@ -252,6 +252,7 @@ void EXTI4_IRQHandler(void)
     if (!LL_GPIO_IsInputPinSet(TRIGGER_ADC_SINE_GPIO_Port, TRIGGER_ADC_SINE_Pin))
     {
       start_timer_trigger_read_adc();
+      LL_GPIO_TogglePin(BLUE_LED_GPIO_Port, BLUE_LED_Pin);
     }
     /* USER CODE END LL_EXTI_LINE_4 */
   }
