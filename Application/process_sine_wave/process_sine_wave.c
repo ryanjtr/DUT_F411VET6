@@ -33,6 +33,7 @@ void stop_timer_trigger_read_adc()
 	if (count_take_sine++ == 0)
 	{
 		start_timer_trigger_read_adc();
+		LL_GPIO_TogglePin(BLUE_LED_GPIO_Port, BLUE_LED_Pin);
 	}
 	else
 	{
