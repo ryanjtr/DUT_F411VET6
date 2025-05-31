@@ -138,13 +138,8 @@ int main(void)
 
   LL_GPIO_TogglePin(ORANGE_LED_GPIO_Port, ORANGE_LED_Pin);
 
-  //	test_case_1();
-  //
-  // test_case_2();
-
-  // test_case_3();
-  test_case_4();
-  // test_case_5();
+  test_case_3();
+  // test_case_4();
 
   vTaskStartScheduler();
   /* USER CODE END 2 */
