@@ -45,5 +45,5 @@ void test_case_4(void)
 
 void test_case_5(void)
 {
-    xTaskCreate(generate_square_pulse, "suqare pulse", configMINIMAL_STACK_SIZE, NULL, 3, NULL);
+    xTaskCreate(generate_square_pulse, "suqare pulse", configMINIMAL_STACK_SIZE, NULL, 1, NULL);
 }
