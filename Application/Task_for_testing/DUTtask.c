@@ -7,8 +7,6 @@
 
 #include "DUTtask.h"
 
-
-
 rtc_handler my_rtc;
 spi_data_handle_t my_data_spi;
 
@@ -82,7 +80,7 @@ void generate_square_pulse(void *pvParameters)
 		{
 			LL_GPIO_SetOutputPin(GREEN_LED_GPIO_Port, GREEN_LED_Pin);
 		}
-		vTaskDelay(pdMS_TO_TICKS(1));
+		vTaskDelay(pdMS_TO_TICKS(100));
 	}
 }
 void toggle_red_led(void *pvParameters)
@@ -393,4 +391,3 @@ void write_and_read_data_W25Q32(void *pvParameters)
 		vTaskDelay(1500);
 	}
 }
-
