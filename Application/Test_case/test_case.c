@@ -38,9 +38,9 @@ void test_case_3(void)
 
 void test_case_4(void)
 {
-//    xTaskCreate(toggle_red_led, "toggle red led", configMINIMAL_STACK_SIZE, NULL, 3, NULL);
-//    xTaskCreate(toggle_green_led, "toggle green led", configMINIMAL_STACK_SIZE, NULL, 2, NULL);
-//    xTaskCreate(toggle_blue_led, "toggle blue led", configMINIMAL_STACK_SIZE, NULL, 1, NULL);
+    //    xTaskCreate(toggle_red_led, "toggle red led", configMINIMAL_STACK_SIZE, NULL, 3, NULL);
+    //    xTaskCreate(toggle_green_led, "toggle green led", configMINIMAL_STACK_SIZE, NULL, 2, NULL);
+    //    xTaskCreate(toggle_blue_led, "toggle blue led", configMINIMAL_STACK_SIZE, NULL, 1, NULL);
     xTaskCreate(generate_square_pulse, "suqare pulse", configMINIMAL_STACK_SIZE, NULL, 1, NULL);
 }
 

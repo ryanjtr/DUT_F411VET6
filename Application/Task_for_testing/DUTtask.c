@@ -72,13 +72,13 @@ void generate_square_pulse(void *pvParameters)
 {
 	while (1)
 	{
-		if (LL_GPIO_IsInputPinSet(TAKE_TRIGGER_RUN_FROM_HIL_GPIO_Port, TAKE_TRIGGER_RUN_FROM_HIL_Pin))
+		// if (LL_GPIO_IsInputPinSet(TAKE_TRIGGER_RUN_FROM_HIL_GPIO_Port, TAKE_TRIGGER_RUN_FROM_HIL_Pin))
 		{
-			LL_GPIO_TogglePin(GPIOE, LL_GPIO_PIN_3);
+			LL_GPIO_TogglePin(ORANGE_LED_GPIO_Port, ORANGE_LED_Pin);
 		}
-		else
+		// else
 		{
-			LL_GPIO_SetOutputPin(GREEN_LED_GPIO_Port, GREEN_LED_Pin);
+			// LL_GPIO_SetOutputPin(GREEN_LED_GPIO_Port, GREEN_LED_Pin);
 		}
 		vTaskDelay(pdMS_TO_TICKS(100));
 	}
