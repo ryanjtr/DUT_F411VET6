@@ -221,14 +221,14 @@ void EXTI2_IRQHandler(void)
     LL_EXTI_ClearFlag_0_31(LL_EXTI_LINE_2);
     /* USER CODE BEGIN LL_EXTI_LINE_2 */
 
-    // Chỉ ghi nhận th�?i gian và đánh dấu sự kiện
-    last_press_time = xTaskGetTickCountFromISR(); // Lấy tick từ FreeRTOS trong ISR
-    button_pressed = pdTRUE;                      // Báo hiệu nút đã được nhấn
-
-    // Thức dậy task xử lý nếu cần
-    BaseType_t xHigherPriorityTaskWoken = pdFALSE;
-    vTaskNotifyGiveFromISR(buttonTaskHandle, &xHigherPriorityTaskWoken); // Gửi thông báo đến task
-    portYIELD_FROM_ISR(xHigherPriorityTaskWoken);                        // Chuyển ngữ cảnh nếu cần
+    if(LL_GPIO_IsInputPinSet(GPIOD, LL_GPIO_PIN_2))
+    {
+    	LL_GPIO_SetOutputPin(CONTROL_REDLED_SOFTWARE_GPIO_Port, CONTROL_REDLED_SOFTWARE_Pin);
+    }
+    else
+    {
+    	LL_GPIO_ResetOutputPin(CONTROL_REDLED_SOFTWARE_GPIO_Port, CONTROL_REDLED_SOFTWARE_Pin);
+    }
 
     /* USER CODE END LL_EXTI_LINE_2 */
   }
